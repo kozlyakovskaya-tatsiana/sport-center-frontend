@@ -5,13 +5,34 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import './index.css'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+import AppRoutes from './routes/AppRoutes'
+import { createTheme, ThemeProvider } from '@mui/material'
+
+const theme = createTheme({
+ components: {
+  MuiLink: {
+   defaultProps: {
+    color: 'rgba(0, 0, 0, 0.54)',
+   },
+   styleOverrides: {
+    root: {
+     textDecoration: 'none',
+    },
+   },
+  },
+ },
+})
 
 const root = ReactDOM.createRoot(document.querySelector('#root')!)
 root.render(
  <React.StrictMode>
-  <App />
+  <BrowserRouter>
+   <ThemeProvider theme={theme}>
+    <AppRoutes />
+   </ThemeProvider>
+  </BrowserRouter>
  </React.StrictMode>
 )
 

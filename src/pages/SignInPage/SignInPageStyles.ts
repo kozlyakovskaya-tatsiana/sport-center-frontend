@@ -1,8 +1,8 @@
 import React from 'react'
 
 const paperStyle: React.CSSProperties = {
- paddingTop: 60,
- height: '70vh',
+ display: 'flex',
+ height: '50vh',
  borderRadius: '30px',
 }
 

@@ -5,10 +5,10 @@ import { Paper } from '@material-ui/core'
 import { signInPageStyles } from './SignInPageStyles'
 
 const SignInPage = () => (
- <Grid container sx={{ height: '100vh' }} component="main">
+ <Grid container sx={{ mt: 10 }}>
   <Grid item md={4} />
   <Grid item md={4} alignSelf="center">
-   <Paper elevation={16} style={signInPageStyles.paperStyle}>
+   <Paper elevation={12} style={signInPageStyles.paperStyle}>
     <SignIn />
    </Paper>
   </Grid>
