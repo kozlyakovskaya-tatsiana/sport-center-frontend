@@ -9,7 +9,7 @@ import GroupsIcon from '@mui/icons-material/Groups'
 import PaymentIcon from '@mui/icons-material/Payment'
 import AssessmentIcon from '@mui/icons-material/Assessment'
 import MapIcon from '@mui/icons-material/Map'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import {
  GROUPS_ROUTE,
  LOCATIONS_ROUTE,
@@ -39,46 +39,58 @@ const drawerDownMenuItems: DrawerMenuItem[] = [
  { text: 'Personal', icon: <PersonIcon />, navLinkTo: PROFILE_INFO_ROUTE },
 ]
 
-const AppDrawer: React.FC = () => (
- <Box sx={{ display: 'flex' }}>
-  <Drawer
-   variant="permanent"
-   sx={{
-    width: drawerWidth,
-    flexShrink: 0,
-    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-   }}
-  >
-   <Toolbar />
-   <Box sx={{ overflow: 'auto' }}>
-    <List>
-     {drawerUpMenuItems?.map((item) => (
-      <ListItem key={item?.text} button>
-       <ListItemIcon>{item?.icon}</ListItemIcon>
-       <Link to={item.navLinkTo} component={NavLink}>
-        {item?.text}
-       </Link>
-      </ListItem>
-     ))}
-    </List>
-    <Divider />
-    <List>
-     {drawerDownMenuItems?.map((item) => (
-      <ListItem key={item?.text} button>
-       <ListItemIcon>{item?.icon}</ListItemIcon>
-       <Link
-        component={NavLink}
-        to={item.navLinkTo}
-        style={{ textDecoration: 'none' }}
+const AppDrawer: React.FC = () => {
+ const location = useLocation()
+
+ return (
+  <Box sx={{ display: 'flex' }}>
+   <Drawer
+    variant="permanent"
+    sx={{
+     width: drawerWidth,
+     flexShrink: 0,
+     [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+    }}
+   >
+    <Toolbar />
+    <Box sx={{ overflow: 'auto' }}>
+     <List>
+      {drawerUpMenuItems?.map((item) => (
+       <ListItem
+        key={item?.text}
+        button
+        selected={location.pathname.includes(item?.navLinkTo)}
        >
-        {item?.text}
-       </Link>
-      </ListItem>
-     ))}
-    </List>
-   </Box>
-  </Drawer>
- </Box>
-)
+        <ListItemIcon>{item?.icon}</ListItemIcon>
+        <Link to={item.navLinkTo} component={NavLink}>
+         {item?.text}
+        </Link>
+       </ListItem>
+      ))}
+     </List>
+     <Divider />
+     <List>
+      {drawerDownMenuItems?.map((item) => (
+       <ListItem
+        key={item?.text}
+        button
+        selected={location.pathname.includes(item?.navLinkTo)}
+       >
+        <ListItemIcon>{item?.icon}</ListItemIcon>
+        <Link
+         component={NavLink}
+         to={item.navLinkTo}
+         style={{ textDecoration: 'none' }}
+        >
+         {item?.text}
+        </Link>
+       </ListItem>
+      ))}
+     </List>
+    </Box>
+   </Drawer>
+  </Box>
+ )
+}
 
 export default AppDrawer
